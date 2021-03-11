@@ -78,16 +78,13 @@ class category_select_form extends moodleform {
 		global $course;
 		
         $mform = $this->_form; // Don't forget the underscore! 
-		// Get grade_categories table
-		$categories = $DB->get_records_sql("SELECT categories.id AS categoryid, categories.fullname AS name
-								FROM {grade_categories} AS categories
-								WHERE categories.courseid = ? AND categories.parent = ?
-								ORDER BY name ASC", array($course->id, PROGRESS_EXAM_CATEGORY));
 		
 		// Create form inputs
+		foreach ($this->_customdata['categories'] as $category) $radio = $mform->addElement('radio', 'categoryid', '', $category->name, $category->categoryid);
+		
 		$first = reset($categories);
-		foreach ($categories as $category) $radio = $mform->addElement('radio', 'categoryid', '', $category->name, $category->categoryid);
 		$mform->setDefault('categoryid', $first->categoryid);
+		
 		$this->add_action_buttons(true, 'Generate Report');
     }
     //Custom validation should be added here
@@ -155,7 +152,13 @@ function generate_report($categoryid) {
 	exit;
 }
 
-$category_select = new category_select_form("?id=".$courseid);
+$data = array();
+$data['categories'] = $DB->get_records_sql("SELECT categories.id AS categoryid, categories.fullname AS name
+									FROM {grade_categories} AS categories
+									WHERE categories.courseid = ? AND categories.parent = ?
+									ORDER BY name ASC", array($course->id, PROGRESS_EXAM_CATEGORY));
+
+$category_select = new category_select_form("?id=".$courseid, $data);
 
 //Form processing and displaying is done here
 if ($category_select->is_cancelled()) {
