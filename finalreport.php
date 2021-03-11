@@ -92,7 +92,7 @@ while ($userdata = $gui->next_user()) {
 									
 								
 	$html .= '<table cellpadding="5" border="1">';
-	$html .= '<tr><th style="width: 10%; text-align: center; font-weight: bold; background-color: #86baf2;">Nr.</th><th style="width: 55%; text-align: center; font-weight: bold; background-color: #86baf2;">Egzamin</th><th style="width: 15%; text-align: center; font-weight: bold; background-color: #86baf2;">Wynik</th><th style="width: 20%; text-align: center; font-weight: bold; background-color: #86baf2;">Data</th></tr>';
+	$html .= '<tr><th style="width: 10%; text-align: center; font-weight: bold; background-color: #86baf2;">Nr</th><th style="width: 55%; text-align: center; font-weight: bold; background-color: #86baf2;">Egzamin</th><th style="width: 15%; text-align: center; font-weight: bold; background-color: #86baf2;">Wynik</th><th style="width: 20%; text-align: center; font-weight: bold; background-color: #86baf2;">Data</th></tr>';
 
 	//Table of grades
 	$i=0;
