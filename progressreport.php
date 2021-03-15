@@ -80,7 +80,7 @@ class category_select_form extends moodleform {
         $mform = $this->_form; // Don't forget the underscore! 
 		
 		// Create form inputs
-		foreach ($this->_customdata['categories'] as $category) $radio = $mform->addElement('radio', 'categoryid', '', $category->name, $category->categoryid);
+		foreach ($this->_customdata['categories'] as $category) $mform->addElement('radio', 'categoryid', '', $category->name, $category->categoryid);
 		
 		$first = reset($categories);
 		$mform->setDefault('categoryid', $first->categoryid);
