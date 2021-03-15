@@ -82,7 +82,7 @@ class category_select_form extends moodleform {
 		// Create form inputs
 		foreach ($this->_customdata['categories'] as $category) $mform->addElement('radio', 'categoryid', '', $category->name, $category->categoryid);
 		
-		$first = reset($categories);
+		$first = reset($this->_customdata['categories']);
 		$mform->setDefault('categoryid', $first->categoryid);
 		
 		$this->add_action_buttons(true, 'Generate Report');
