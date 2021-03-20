@@ -64,11 +64,16 @@ class pr_pdf extends pdf {
         $image_file = 'positiverate.png';
         $this->Image($image_file, 140, 10, 0, 15, 'PNG');
     }
+	
+	public function Footer() {
+		$this->SetFont(FONT_FAMILY, 'B', 10);
+		$this->Cell(140,35, 'Druk: 2/PR/TF');
+	}
 }
 
 $doc = new pr_pdf;
 $doc->setPrintHeader(true);
-$doc->setPrintFooter(false);
+$doc->setPrintFooter(true);
 $doc->SetMargins(MARGIN_LEFT, MARGIN_TOP, MARGIN_RIGHT);
 $doc->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $doc->SetFont(FONT_FAMILY, '', FONT_SIZE);
