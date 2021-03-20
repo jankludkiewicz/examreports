@@ -66,8 +66,10 @@ class pr_pdf extends pdf {
     }
 	
 	public function Footer() {
+		// Position at 1.5 cm from bottom
+		$this->SetY(-15);
 		$this->SetFont(FONT_FAMILY, 'B', 10);
-		$this->Cell(0,35, 'Druk: 2/PR/TF');
+		$this->Cell(0,10, 'Druk: 2/PR/TF','',0,0,'R');
 	}
 }
 
