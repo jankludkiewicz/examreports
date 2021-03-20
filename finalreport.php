@@ -67,7 +67,7 @@ class pr_pdf extends pdf {
 	
 	public function Footer() {
 		$this->SetFont(FONT_FAMILY, 'B', 10);
-		$this->Cell(140,35, 'Druk: 2/PR/TF');
+		$this->Cell(0,35, 'Druk: 2/PR/TF');
 	}
 }
 
