@@ -67,6 +67,13 @@ class pr_pdf extends pdf {
         $image_file = 'positiverate.png';
         $this->Image($image_file, 140, 10, 0, 15, 'PNG');
     }
+	
+	public function Footer() {
+		// Position at 1.5 cm from bottom
+		$this->SetY(-15);
+		$this->SetFont(FONT_FAMILY, 'B', 10);
+		$this->Cell(0,10, 'Druk: 1/PR/TF',0,0,'R');
+	}
 }
 
 class category_select_form extends moodleform {
