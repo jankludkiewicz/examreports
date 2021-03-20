@@ -108,7 +108,7 @@ class pr_pdf extends pdf {
 
 $doc = new pr_pdf;
 $doc->setPrintHeader(true);
-$doc->setPrintFooter(false);
+$doc->setPrintFooter(true);
 $doc->SetMargins(MARGIN_LEFT, MARGIN_TOP, MARGIN_RIGHT);
 $doc->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $doc->SetFont(FONT_FAMILY, '', FONT_SIZE);
