@@ -144,7 +144,7 @@ function generate_report($categoryid) {
 			else $grade_display = "-";
 			if (!empty($grade->date)) $date_display = date("d.m.Y", $grade->date);
 			else $date_display = "-";
-			$html .= '<tr><td style="background-color: #f2f2f2; text-align: center;">'.(i.'.</td><td style="text-align: center;">'.$grade->examname.'</td><td style="text-align: center;">'.$grade_display.'</td><td style="text-align: center;">'.$date_display.'</td></tr>';
+			$html .= '<tr><td style="background-color: #f2f2f2; text-align: center;">'.$i.'.</td><td style="text-align: center;">'.$grade->examname.'</td><td style="text-align: center;">'.$grade_display.'</td><td style="text-align: center;">'.$date_display.'</td></tr>';
 			$i++;
 		}
 
