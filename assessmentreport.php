@@ -150,7 +150,7 @@ foreach ($grades as $grade) {
 	
 	if ($first->categoryid==SUMMATIVE_ASSESSMENT_CATEGORY) {
 		$html .= '<br><br><table border="1" cellpadding="5">';
-		$html .= '<tr><td style="width: 50%; background-color: #86baf2; text-align: center; font-weight: bold;">Wynik oceny:</td><td style="width: 50%; text-align: center;">'.($pass?'ZALICZONY / <s>NIEZALICZONY</s>':'<s>ZALICZONY</s> / NIEZALICZONY').'*</td></tr>';
+		$html .= '<tr><td style="width: 50%; background-color: #86baf2; text-align: center; font-weight: bold;">Wynik oceny:</td><td style="width: 50%; text-align: center;">'.$pass.' '.($pass?'ZALICZONY / <s>NIEZALICZONY</s>':'<s>ZALICZONY</s> / NIEZALICZONY').'*</td></tr>';
 		$html .= '</table>';
 	}
 	
