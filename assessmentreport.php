@@ -54,7 +54,7 @@ $cm = $modinfo->get_cm($modid);
 $context = context_module::instance($cm->id);
 require_capability('moodle/grade:export', $context);
 
-$grades = $DB->get_records_sql("SELECT student.id AS userid, student.firstname AS studentfirstname, student.lastname AS studentlastname, grades.feedback AS feedback, grades.rawgrade, grades.rawgrademax, grades.rawgrademin, grader.firstname AS graderfirstname, grader.lastname AS graderlastname, grades.timemodified AS timegraded, categories.id AS categoryid 
+$grades = $DB->get_records_sql("SELECT student.id AS userid, student.firstname AS studentfirstname, student.lastname AS studentlastname, grades.feedback AS feedback, items.gradepass, grades.finalgrade, grader.firstname AS graderfirstname, grader.lastname AS graderlastname, grades.timemodified AS timegraded, categories.id AS categoryid 
 								FROM {course} AS course
 								JOIN {course_modules} modules ON course.id = modules.course
 								JOIN {assign} assign ON modules.instance = assign.id
@@ -122,6 +122,9 @@ foreach ($grades as $grade) {
 	$html .= '<table border="1" cellpadding="5">';
 	$html .= '<tr><th style="width: 71.9%; background-color: #86baf2; text-align: center; font-weight: bold;">Kompetencja kluczowa</th><th style="width: 28.1%; background-color: #86baf2; text-align: center; font-weight: bold;">Wartość wskaźnika</th></tr>';
 	
+	if ($grade.finalgrade < $grade.gradepass) $pass = false;
+	else $pass = true;
+	
 	$corecompetencies = $DB->get_records_sql("SELECT grc.description, grl.definition, stu.id AS userid
                                 FROM {course} AS crs
                                 JOIN {course_modules} AS cm ON crs.id = cm.course
@@ -147,7 +150,7 @@ foreach ($grades as $grade) {
 	
 	if ($first->categoryid==SUMMATIVE_ASSESSMENT_CATEGORY) {
 		$html .= '<br><br><table border="1" cellpadding="5">';
-		$html .= '<tr><td style="width: 50%; background-color: #86baf2; text-align: center; font-weight: bold;">Wynik oceny:</td><td style="width: 50%; text-align: center;">ZALICZONY / NIEZALICZONY*</td></tr>';
+		$html .= '<tr><td style="width: 50%; background-color: #86baf2; text-align: center; font-weight: bold;">Wynik oceny:</td><td style="width: 50%; text-align: center;">'.($pass?'ZALICZONY / <s>NIEZALICZONY</s>':'<s>ZALICZONY</s> / NIEZALICZONY').'*</td></tr>';
 		$html .= '</table>';
 	}
 	
