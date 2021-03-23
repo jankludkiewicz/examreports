@@ -146,7 +146,7 @@ foreach ($grades as $grade) {
 	$html .= '</table>';
 	
 	$html .= '<h2>Komentarz instruktora:</h2>';
-	$html .= '<p style="text-align: justified; border: 1px solid black">'.$grade->feedback.'</p>';
+	$html .= '<p style="text-align: justified; border: 1px solid black; padding: 5px;">'.$grade->feedback.'</p>';
 	
 	$doc->writeHTML($html, true, false, false, false, '');
 }
