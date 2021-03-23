@@ -57,7 +57,7 @@ class pr_pdf extends pdf {
     //Page header
     public function Header() {
 		// Date
-		$this->SetFont(FONT_FAMILY, 'B', 16);
+		$this->SetFont(FONT_FAMILY, 'B', 12);
         $this->Cell(0, 40, 'PROTOKOŁY EGZAMINÓW KOŃCOWYCH');
 		
         // Logo
@@ -87,7 +87,7 @@ $gui->init();
 while ($userdata = $gui->next_user()) {
 	$user = $userdata->user;
 	$doc->AddPage();
-	$html = '<p style="text-align: justified;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uczestnik szkolenia <b>'.$user->firstname.' '.$user->lastname.'</b> (imię i nazwisko) uzyskał nastepujące wyniki egzaminów końcowych podczas szkolenia <b>'.$course->fullname.'</b> nr <b>'.$course->shortname.'</b>. Stan na dzień <b>'.date("d.m.Y", TIME_CREATED).'.</b></p>';
+	$html = '<p style="text-align: justified;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uczestnik szkolenia <b>'.$user->firstname.' '.$user->lastname.'</b> (imię i nazwisko) uzyskał nastepujące wyniki egzaminów końcowych podczas szkolenia <b>'.$course->fullname.'</b> (rodzaj szkolenia) nr <b>'.$course->shortname.'</b> (numer szkolenia). Stan na dzień <b>'.date("d.m.Y", TIME_CREATED).'</b> (data).</p>';
 			
 	// Show grade table
 	$grades = $DB->get_records_sql("SELECT items.itemname AS examname, grades.finalgrade AS finalgrade, grades.rawgrademax AS rawgrademax, grades.rawgrademin AS rawgrademin, grades.userid AS userid, grades.timemodified AS date
@@ -99,16 +99,16 @@ while ($userdata = $gui->next_user()) {
 									
 								
 	$html .= '<table cellpadding="5" border="1">';
-	$html .= '<tr><th style="width: 10%; text-align: center; font-weight: bold; background-color: #86baf2;">Nr</th><th style="width: 55%; text-align: center; font-weight: bold; background-color: #86baf2;">Egzamin</th><th style="width: 15%; text-align: center; font-weight: bold; background-color: #86baf2;">Wynik</th><th style="width: 20%; text-align: center; font-weight: bold; background-color: #86baf2;">Data</th></tr>';
+	$html .= '<tr><th style="width: 9.4%; text-align: center; font-weight: bold; background-color: #86baf2;">L. p.</th><th style="width: 50.2%; text-align: center; font-weight: bold; background-color: #86baf2;">Egzamin</th><th style="width: 15.3%; text-align: center; font-weight: bold; background-color: #86baf2;">Wynik</th><th style="width: 25.1%; text-align: center; font-weight: bold; background-color: #86baf2;">Data zaliczenia</th></tr>';
 
 	//Table of grades
-	$i=0;
+	$i=1;
 	foreach ($grades as $grade) {
 		if (!empty($grade->finalgrade)) $grade_display = number_format($grade->finalgrade/$grade->rawgrademax*100,2)."%";
 		else $grade_display = "-";
 		if (!empty($grade->date)) $date_display = date("d.m.Y", $grade->date);
 		else $date_display = "-";
-		$html .= '<tr><td style="background-color: #f2f2f2; text-align: center;">'.($i+1).'.</td><td style="text-align: center;">'.$grade->examname.'</td><td style="text-align: center;">'.$grade_display.'</td><td style="text-align: center;">'.$date_display.'</td></tr>';
+		$html .= '<tr><td style="background-color: #f2f2f2; text-align: center;">'.$i.'.</td><td style="text-align: center;">'.$grade->examname.'</td><td style="text-align: center;">'.$grade_display.'</td><td style="text-align: center;">'.$date_display.'</td></tr>';
 		$i++;
 	}
 
