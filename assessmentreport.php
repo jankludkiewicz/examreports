@@ -122,10 +122,10 @@ foreach ($grades as $grade) {
 	$html .= '<table border="1" cellpadding="5">';
 	$html .= '<tr><th style="width: 71.9%; background-color: #86baf2; text-align: center; font-weight: bold;">Kompetencja kluczowa</th><th style="width: 28.1%; background-color: #86baf2; text-align: center; font-weight: bold;">Wartość wskaźnika</th></tr>';
 	
-	if ($grade.finalgrade < $grade.gradepass) $pass = false;
+	if ($grade->finalgrade < $grade->gradepass) $pass = false;
 	else $pass = true;
 	
-	var_dump($grade.finalgrade);
+	var_dump($grade->finalgrade." ".$grade->gradepass);
 	
 	$corecompetencies = $DB->get_records_sql("SELECT grc.description, grl.definition, stu.id AS userid
                                 FROM {course} AS crs
