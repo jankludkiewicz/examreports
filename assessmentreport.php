@@ -90,7 +90,7 @@ class pr_pdf extends pdf {
     public function Header() {
 		global $title_header;
 		// Date
-		$this->SetFont(FONT_FAMILY, 'B', 16);
+		$this->SetFont(FONT_FAMILY, 'B', 12);
         $this->Cell(0, 40, $title_header);
 		
         // Logo
@@ -116,11 +116,11 @@ $doc->SetFont(FONT_FAMILY, '', FONT_SIZE);
 foreach ($grades as $grade) {
 	$doc->AddPage();
 	
-	$html = '<p style="text-align: justified;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dnia <b>'.date("d.m.Y",$grade->timegraded).'</b>, uczestnik szkolenia <b>'.$grade->studentfirstname.' '.$grade->studentlastname.'</b> został poddany '.$assessment_type_text.', w ćwiczeniu <b>'.$cm->name.'</b>, podczas szkolenia <b>'.$course->fullname.'</b> nr <b>'.$course->shortname.'</b>. Oceny dokonał <b>'.$grade->graderfirstname.' '.$grade->graderlastname.'</b>. Uczestnik szkolenia uzyskał następujące wyniki:</p>';
+	$html = '<p style="text-align: justified;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dnia <b>'.date("d.m.Y",$grade->timegraded).'</b> (data), uczestnik szkolenia <b>'.$grade->studentfirstname.' '.$grade->studentlastname.'</b> (imię i nazwisko) został poddany '.$assessment_type_text.', w ćwiczeniu <b>'.$cm->name.'</b> (nazwa ćwiczenia), podczas szkolenia <b>'.$course->fullname.'</b> (rodzaj szkolenia) nr <b>'.$course->shortname.'</b> (numer szkolenia). Oceny dokonał <b>'.$grade->graderfirstname.' '.$grade->graderlastname.'</b> (imię i nazwisko oceniającego). Uczestnik szkolenia uzyskał następujące wyniki:</p>';
 
 	//Core competencies table
 	$html .= '<table border="1" cellpadding="5">';
-	$html .= '<tr><th style="width: 70%; background-color: #86baf2; text-align: center; font-weight: bold;">Kompetencja kluczowa</th><th style="width: 30%; background-color: #86baf2; text-align: center; font-weight: bold;">Wartość wskaźnika</th></tr>';
+	$html .= '<tr><th style="width: 71.9%; background-color: #86baf2; text-align: center; font-weight: bold;">Kompetencja kluczowa</th><th style="width: 28.1%; background-color: #86baf2; text-align: center; font-weight: bold;">Wartość wskaźnika</th></tr>';
 	
 	$corecompetencies = $DB->get_records_sql("SELECT grc.description, grl.definition, stu.id AS userid
                                 FROM {course} AS crs
@@ -146,7 +146,7 @@ foreach ($grades as $grade) {
 	$html .= '</table>';
 	
 	$html .= '<h2>Komentarz instruktora:</h2>';
-	$html .= '<p style="text-align: justified;">'.$grade->feedback.'</p>';
+	$html .= '<p style="text-align: justified; border: 1px solid black">'.$grade->feedback.'</p>';
 	
 	$doc->writeHTML($html, true, false, false, false, '');
 }
