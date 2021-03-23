@@ -54,7 +54,7 @@ $cm = $modinfo->get_cm($modid);
 $context = context_module::instance($cm->id);
 require_capability('moodle/grade:export', $context);
 
-$grades = $DB->get_records_sql("SELECT student.id AS userid, student.firstname AS studentfirstname, student.lastname AS studentlastname, grades.feedback AS feedback, items.gradepass, grades.rawgrade, grader.firstname AS graderfirstname, grader.lastname AS graderlastname, grades.timemodified AS timegraded, categories.id AS categoryid 
+$grades = $DB->get_records_sql("SELECT student.id AS userid, student.firstname AS studentfirstname, student.lastname AS studentlastname, grades.feedback AS feedback, items.gradepass, grades.finalgrade, grader.firstname AS graderfirstname, grader.lastname AS graderlastname, grades.timemodified AS timegraded, categories.id AS categoryid 
 								FROM {course} AS course
 								JOIN {course_modules} modules ON course.id = modules.course
 								JOIN {assign} assign ON modules.instance = assign.id
@@ -124,8 +124,6 @@ foreach ($grades as $grade) {
 	
 	if ($grade->finalgrade < $grade->gradepass) $pass = false;
 	else $pass = true;
-	
-	var_dump($grade);
 	
 	$corecompetencies = $DB->get_records_sql("SELECT grc.description, grl.definition, stu.id AS userid
                                 FROM {course} AS crs
