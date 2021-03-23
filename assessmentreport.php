@@ -145,8 +145,18 @@ foreach ($grades as $grade) {
 	
 	$html .= '</table>';
 	
+	if ($first->categoryid==SUMMATIVE_ASSESSMENT_CATEGORY) {
+		$html .= '<table border="1" cellpadding="5">';
+		$html .= '<tr><td style="width: 50%; background-color: #86baf2; text-align: center; font-weight: bold;">Wynik oceny:</td><td style="width: 50%; text-align: center;">ZALICZONY / NIEZALICZONY*</td></tr>';
+		$html .= '</table>';
+	}
+	
 	$html .= '<h3>Komentarz instruktora:</h3>';
 	$html .= '<table border="1" cellpadding="5"><tr><td><p style="text-align: justified;">'.$grade->feedback.'</p></td></tr></table>';
+	
+	if ($first->categoryid==SUMMATIVE_ASSESSMENT_CATEGORY) {
+		$html .= '* niepotrzebne skreślić';
+	}
 	
 	$doc->writeHTML($html, true, false, false, false, '');
 }
