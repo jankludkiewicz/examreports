@@ -125,7 +125,7 @@ foreach ($grades as $grade) {
 	if ($grade.finalgrade < $grade.gradepass) $pass = false;
 	else $pass = true;
 	
-	var_dump($pass);
+	var_dump($grade.finalgrade);
 	
 	$corecompetencies = $DB->get_records_sql("SELECT grc.description, grl.definition, stu.id AS userid
                                 FROM {course} AS crs
