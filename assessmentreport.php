@@ -94,7 +94,7 @@ class pr_pdf extends pdf {
         $this->Cell(0, 40, $title_header);
 		
         // Logo
-        $image_file = 'positiverate.png';
+        $image_file = 'logo.png';
         $this->Image($image_file, 140, 10, 0, 15, 'PNG');
     }
 	
